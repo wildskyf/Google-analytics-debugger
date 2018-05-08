@@ -1,0 +1,23 @@
+{
+  "browser_action": {
+    "default_icon": "icon-off.png",
+    "default_title": "GA Debug: OFF"
+  },
+  "description": "Prints useful information to the JavaScript console by enabling the debug version of the Google Analytics Javascript.",
+  "background": {"scripts": ["background.js"]},
+  "name": "Google Analytics Debugger",
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs"
+  ],
+  "icons": {
+    "48": "icon-48.png",
+    "128": "icon-128.png",
+    "16": "icon-16.png"
+  },
+  "manifest_version": 2,
+  "version": "2.6.1"
+}
