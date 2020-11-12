@@ -3,6 +3,7 @@
  */
 var debug = false;
 var hasAPIs = chrome.webRequest;
+
 updateBrowserAction();
 // Ga.js is officially served from two domains: www.g-a.com and ssl.g-a.com for
 // http and https respectively. Other files are just served from single domain.
@@ -27,7 +28,7 @@ chrome.browserAction.onClicked.addListener(
         updateBrowserAction();
         chrome.tabs.update(tab.id, {
             url: tab.url,
-            selected: tab.selected
+            // WILD XXX // selected: tab.selected
         }, null);
         hasAPIs && chrome.webRequest.handlerBehaviorChanged();
     }
@@ -82,6 +83,7 @@ hasAPIs && chrome.webRequest.onBeforeRequest.addListener(function(details) {
 }, {
     urls: [GA_HTTP, GA_HTTPS, DC_HTTP, UA_HTTP, GTAG_HTTP]
 }, ['blocking']);
+
 hasAPIs && chrome.webRequest.onBeforeSendHeaders.addListener(function(details) {
     if (debug) {
         // Look for existing Cookie header.
@@ -113,7 +115,8 @@ hasAPIs && chrome.webRequest.onBeforeSendHeaders.addListener(function(details) {
     }
 }, {
     urls: [GTAG_HTTP]
-}, ['blocking', 'requestHeaders', 'extraHeaders']);
+}, ['blocking', 'requestHeaders'/* WILD XXX // , 'extraHeaders'*/]);
+
 /**
  * Searches the given cookie string for a cookie named cookieName.  If found,
  * replaces the cookie's value with cookieValue.  Otherwise, appends a new
